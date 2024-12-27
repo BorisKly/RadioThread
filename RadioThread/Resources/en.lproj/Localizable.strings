@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  RadioThread
+
+  Created by Borys Klykavka on 26.12.2024.
+  
+*/
+
+"stations_title" = "Stations";
+"favorites_title" = "Favorites";
+"discover_title" = "Discover";
+"settings_title" = "Settings";
+

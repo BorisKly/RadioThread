@@ -15,31 +15,34 @@ struct ContentView: View {
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
         animation: .default)
     private var items: FetchedResults<Item>
-
+    
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
+        
+        TabView {
+            StationsView()
+                .tabItem {
+                    Image(systemName: "radio")
+                    Text(AppConstants.stations_title.localized)
                 }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
+            
+            FavoritesView()
+                .tabItem {
+                    Image(systemName: "heart")
+                    Text(AppConstants.favorites_title.localized)
                 }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
+            
+            DiscoverView()
+                .tabItem {
+                    Image(systemName: "music.note.list")
+                    Text(AppConstants.discover_title.localized)
                 }
-            }
-            Text("Select an item")
+            SettingsView()
+                .tabItem {
+                    Image(systemName: "gearshape.fill")
+                    Text(AppConstants.settings_title.localized)
+                }
         }
+        .accentColor(Color.prAccent)
     }
 
     private func addItem() {
